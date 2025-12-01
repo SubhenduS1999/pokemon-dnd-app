@@ -21,7 +21,7 @@ export default function RemoveFavoriteDropZone() {
   return (
     <div
       ref={(node) => {
-        if (node) dropRef(node); // <-- FIXED
+        if (node) dropRef(node);
       }}
       style={{
         position: "fixed",
