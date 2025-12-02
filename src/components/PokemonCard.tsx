@@ -9,10 +9,10 @@ export default function PokemonCard({ name }: Props) {
   return (
     <div
       style={{
-        border: "1px solid #ddd",
+        border: "1px solid #000",
         padding: "20px",
         borderRadius: "10px",
-        width: "200px",
+        width: "210px",
         textAlign: "center",
         margin: "10px",
       }}
