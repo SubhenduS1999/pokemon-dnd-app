@@ -38,10 +38,10 @@ export default function FavoritesDropZone() {
         zIndex: 1100,
       }}
     >
-      <h4 style={{ margin: "0 0 8px 0" }}>Favorites (drop here)</h4>
+      <h4 style={{ margin: "0 0 8px 0" }}>Favourites (drop here)</h4>
 
       {favorites.length === 0 ? (
-        <div style={{ color: "#666" }}>No favorites yet</div>
+        <div style={{ color: "#666" }}>No favourites yet</div>
       ) : (
         <ul style={{ paddingLeft: 18 }}>
           {favorites.map((f) => (
