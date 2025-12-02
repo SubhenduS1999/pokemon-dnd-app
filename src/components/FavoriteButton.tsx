@@ -22,7 +22,7 @@ export default function FavoriteButton({ name }: Props) {
         marginBottom: "10px",
       }}
     >
-      {isFav ? "❤️ Remove Favorite" : "🤍 Add Favorite"}
+      {isFav ? "❤️ Remove Favourite" : "🤍 Add Favourite"}
     </button>
   );
 }

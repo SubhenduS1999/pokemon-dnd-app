@@ -36,7 +36,7 @@ export default function RemoveFavoriteDropZone() {
         zIndex: 1100,
       }}
     >
-      <h4 style={{ margin: 0, color: "red" }}>Remove Favorite</h4>
+      <h4 style={{ margin: 0, color: "red" }}>Remove Favourite</h4>
       <small>Drag here to remove</small>
     </div>
   );
