@@ -1,15 +1,32 @@
+// src/pages/Home.tsx
 import { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
 import PokemonCard from "../components/PokemonCard";
+import SkeletonBox from "../components/SkeletonBox";
 
 export default function Home() {
   const [pokemon, setPokemon] = useState<{ name: string }[]>([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=1000")
-      .then((res) => res.json())
-      .then((data) => setPokemon(data.results));
+    async function loadAll() {
+      try {
+        const res = await fetch(
+          "https://pokeapi.co/api/v2/pokemon?limit=1000"
+        );
+        if (!res.ok) throw new Error("Failed to fetch Pokémon");
+
+        const data = await res.json();
+        setPokemon(data.results);
+      } catch {
+        console.error("Failed to load Pokémon");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadAll();
   }, []);
 
   const filtered = pokemon.filter((p) =>
@@ -17,12 +34,12 @@ export default function Home() {
   );
 
   return (
-    <div style={{ paddingTop: "180px" }}> 
+    <div style={{ paddingTop: "180px" }}>
       {/* FIXED TITLE */}
       <h2
         style={{
           position: "fixed",
-          top: "110px", // header  + search bar height
+          top: "110px",
           left: 0,
           width: "100%",
           background: "white",
@@ -38,7 +55,7 @@ export default function Home() {
       <div
         style={{
           position: "fixed",
-          top: "50px", // header height
+          top: "50px",
           left: 0,
           width: "100%",
           background: "white",
@@ -51,10 +68,17 @@ export default function Home() {
       </div>
 
       {/* LIST */}
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "20px", marginTop: "20px" }}>
-        {filtered.map((p) => (
-          <PokemonCard key={p.name} name={p.name} />
-        ))}
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
+        {loading
+          ? Array.from({ length: 30 }).map((_, i) => (
+              <div key={i} style={{ width: "150px", padding: "10px" }}>
+                <SkeletonBox width="100%" height="140px" />
+                <SkeletonBox width="80%" height="20px" />
+              </div>
+            ))
+          : filtered.map((p) => (
+              <PokemonCard key={p.name} name={p.name} />
+            ))}
       </div>
     </div>
   );
